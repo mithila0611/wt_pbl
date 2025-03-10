@@ -36,7 +36,7 @@
             cursor: pointer;
         }
         button:hover {
-            background: darkblue;
+            background: green;
         }
         .error {
             color: red;
@@ -44,7 +44,7 @@
         }
         .switch {
             margin-top: 10px;
-            color: blue;
+            color: palegoldenrod;
             cursor: pointer;
         }
     </style>
