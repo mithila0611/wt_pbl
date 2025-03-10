@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Login & Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-image: url('stu.jpg');
+            background-position: center;
+            background-size: cover;
+        }
+        .container {
+            width: 350px;
+            margin: auto;
+            
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: darkblue;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        .switch {
+            margin-top: 10px;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 id="formTitle">Student Login</h2>
+
+        <form id="loginForm">
+            <input type="email" id="loginEmail" placeholder="Email" required>
+            <div id="loginEmailError" class="error"></div>
+
+            <input type="password" id="loginPassword" placeholder="Password" required>
+            <div id="loginPasswordError" class="error"></div>
+
+            <button type="submit">Login</button>
+            <p class="switch" onclick="toggleForms()">Don't have an account? Sign up</p>
+        </form>
+
+        <form id="signupForm" style="display: none;">
+            <input type="text" id="signupName" placeholder="Full Name" required>
+            <div id="signupNameError" class="error"></div>
+
+            <input type="email" id="signupEmail" placeholder="Email" required>
+            <div id="signupEmailError" class="error"></div>
+
+            <input type="text" id="signupPhone" placeholder="Phone Number" required>
+            <div id="signupPhoneError" class="error"></div>
+
+            <input type="password" id="signupPassword" placeholder="Password" required>
+            <div id="signupPasswordError" class="error"></div>
+
+            <input type="password" id="signupConfirmPassword" placeholder="Confirm Password" required>
+            <div id="signupConfirmPasswordError" class="error"></div>
+
+            <button type="submit">Sign Up</button>
+            <p class="switch" onclick="toggleForms()">Already have an account? Login</p>
+        </form>
+    </div>
+
+    <script>
+        function toggleForms() {
+            document.getElementById('loginForm').style.display =
+                document.getElementById('loginForm').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('signupForm').style.display =
+                document.getElementById('signupForm').style.display === 'none' ? 'block' : 'none';
+            document.getElementById('formTitle').innerText =
+                document.getElementById('signupForm').style.display === 'block' ? 'Student Signup' : 'Student Login';
+        }
+
+        // LOGIN VALIDATION
+        document.getElementById('loginForm').onsubmit = function (event) {
+            event.preventDefault();
+            let valid = true;
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            const emailError = document.getElementById('loginEmailError');
+            const passwordError = document.getElementById('loginPasswordError');
+
+            emailError.innerHTML = passwordError.innerHTML = '';
+
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                emailError.innerHTML = "Enter a valid email.";
+                valid = false;
+            }
+            if (password.length < 6) {
+                passwordError.innerHTML = "Password must be at least 6 characters.";
+                valid = false;
+            }
+
+            if (valid) {
+                alert("Login Successful!");
+            }
+        };
+
+        // SIGNUP VALIDATION
+        document.getElementById('signupForm').onsubmit = function (event) {
+            event.preventDefault();
+            let valid = true;
+
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const phone = document.getElementById('signupPhone').value.trim();
+            const password = document.getElementById('signupPassword').value.trim();
+            const confirmPassword = document.getElementById('signupConfirmPassword').value.trim();
+
+            const nameError = document.getElementById('signupNameError');
+            const emailError = document.getElementById('signupEmailError');
+            const phoneError = document.getElementById('signupPhoneError');
+            const passwordError = document.getElementById('signupPasswordError');
+            const confirmPasswordError = document.getElementById('signupConfirmPasswordError');
+
+            nameError.innerHTML = emailError.innerHTML = phoneError.innerHTML = passwordError.innerHTML = confirmPasswordError.innerHTML = '';
+
+            if (!/^[A-Za-z\s]{3,}$/.test(name)) {
+                nameError.innerHTML = "Name must contain only letters and be at least 3 characters.";
+                valid = false;
+            }
+
+            if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                emailError.innerHTML = "Enter a valid email.";
+                valid = false;
+            }
+
+            if (!/^\d{10}$/.test(phone)) {
+                phoneError.innerHTML = "Phone number must be 10 digits.";
+                valid = false;
+            }
+
+            if (password.length < 6) {
+                passwordError.innerHTML = "Password must be at least 6 characters.";
+                valid = false;
+            }
+
+            if (confirmPassword !== password) {
+                confirmPasswordError.innerHTML = "Passwords must match.";
+                valid = false;
+            }
+
+            if (valid) {
+                alert("Signup Successful!");
+            }
+        };
+    </script>
+
+</body>
+</html>
