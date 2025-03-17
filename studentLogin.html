@@ -119,6 +119,7 @@
 
             if (valid) {
                 alert("Login Successful!");
+                window.location.href = "dBoard.html";
             }
         };
 
@@ -168,8 +169,23 @@
 
             if (valid) {
                 alert("Signup Successful!");
+                window.location.href = "dBoard.html";
             }
         };
+        function login() {
+            let Sname = document.getElementById("name").value;
+            let Semail = document.getElementById("email").value;
+            let Sphone = document.getElementById("phone").value;
+
+            if (Sname && Semail && Sphone) {
+                localStorage.setItem("name", Sname);
+                localStorage.setItem("email", Semail);
+                localStorage.setItem("phone", Sphone);
+                window.location.href = "dBoard.html"; // Redirect to Dashboard
+            } else {
+                alert("Please fill all fields!");
+            }
+        }
     </script>
 
 </body>
