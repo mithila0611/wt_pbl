@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            width: 60%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-btn {
+            background: #2c3e50;
+            color: white;
+            padding: 10px;
+            width: 200px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+        .profile-btn:hover {
+            background: #1a252f;
+        }
+        .profile {
+            display: none; /* Initially hidden */
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .exam-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .exam-mode {
+            width: 30%;
+            padding: 20px;
+            background: #3498db;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .exam-mode:hover {
+            background: #2980b9;
+        }
+        .logout-btn {
+            margin-top: 20px;
+            background: red;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Profile Button -->
+        <button class="profile-btn" onclick="toggleProfile()">📌 MY PROFILE</button>
+
+        <!-- Student Profile Section (Initially Hidden) -->
+        <div class="profile" id="studentProfile">
+            <h2>Student Profile</h2>
+            <p><strong>Name:</strong> <span id="displayName"></span></p>
+            <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="displayphn"></span></p>
+        </div>
+
+        <!-- Exam Modes -->
+        <h2>Select Exam Mode</h2>
+        <div class="exam-container">
+            <div class="exam-mode" onclick="startExamLow('low')">🟢 Low Level</div>
+            <div class="exam-mode" onclick="startExamMedium('medium')">🟡 Medium Level</div>
+            <div class="exam-mode" onclick="startExamhigh('difficult')">🔴 Difficult Level</div>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        function toggleProfile() {
+            const profile = document.getElementById('studentProfile');
+            profile.style.display = (profile.style.display === 'none' || profile.style.display === '') ? 'block' : 'none';
+        }
+
+        function startExamLow(level) {
+            alert("Starting " + level + " level exam...");
+            window.location.href = "lowLevel.html";
+        }
+        function startExamhigh(level) {
+            alert("Starting " + level + " level exam...");
+            window.location.href = "high.html";
+        }
+        function startExamMedium(level) {
+            alert("Starting " + level + " level exam...");
+            window.location.href = "medium.html";
+        }
+
+        function logout() {
+            localStorage.clear(); // Clear all stored data
+            window.location.href = "StudentLogin.html"; // Redirect to login
+        }
+
+        // Fetch Student Data from localStorage and Display
+        document.getElementById("displayName").innerText = localStorage.getItem("name") || "N/A";
+        console.log("displayName");
+        document.getElementById("displayEmail").innerText = localStorage.getItem("email") || "N/A";
+        console.log("displayEmail");
+        document.getElementById("displayphn").innerText = localStorage.getItem("phone") || "N/A";
+        console.log("displayphn");
+        // Redirect to login if no data is found
+        
+    </script>
+
+</body>
+</html>
